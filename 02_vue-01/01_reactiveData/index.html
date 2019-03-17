@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>vue app</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="app">
+		<!-- データバインディング -->
+		<p>{{message}}</p>
+		<p>{{state.count}}</p>
+		<p>{{state.hoge}}</p>
+		<!-- mustacheには式が記述可能 -->
+		<p>{{1+1}}</p>
+		<p>{{10 > 1 ? 'a' : 'b'}}</p>
+		<!-- 属性にはv-bindディレクティブを使用する -->
+		<input type="text" v-bind:value="message">
+		<!-- 省略可能 -->
+		<input type="text" :value="message">
+		<!-- DOMプロパティにバインド -->
+		<p :text-content.prop="message"></p>
+		<hr>
+		<p>{{count}}回クリック</p>
+		<button v-on:click="increment">カウントを増やす</button>
+		<hr>
+		<!-- クラス名でハイフンがある場合は'で囲う -->
+		<p :class="{child: isChild, 'is-active': isActive}">text</p>
+		<!-- スタイルの場合はキャメルケースで記述する -->
+		<p :style="{color: textColor, backgroundColor: bgColor}">text</p>
+		<!-- 三項演算子はブラケットを使用する -->
+		<p :class="[isActive ? 'active' : '']">text</p>
+		<p :style="myStyle">myText</p>
+		<hr>
+		<!-- 複数データのバインド v-bindディレクティブの引数を省略してオブジェクトを渡す -->
+		<img v-bind="item">
+		<!-- 一部の要素に変更を加える -->
+		<img v-bind="item" :id="'hoge-' + item.id">
+		<hr>
+		<!-- SVGのデータバインディングもできる -->
+		<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+			<circle cx="100" cy="75" v-bind:r="radius" fill="lightpink" />
+		</svg>
+		<input type="range" min="0" max="100" v-model="radius">
+		<hr>
+		<!-- 条件分岐 -->
+		<!-- コメントアウトされる -->
+		<div v-if="ok">v-if</div>
+		<!-- スタイルで非表示となる -->
+		<div v-show="ok">v-show</div>
+		<!-- v-ifのグループ化 -->
+		<template v-if="ok">
+			<header>ヘッダー</header>
+			<main>メイン</main>
+		</template>
+		<!-- if else -->
+		<!-- 仮想DOMの更新エラーを回避するためにユニークなkeyを付与すること -->
+		<div v-if="type === 'A'" key="1">
+			A
+		</div>
+		<div v-else-if="type === 'B'" key="2">
+			B
+		</div>
+		<div v-else key="3">
+			other1
+		</div>
+		<hr>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>

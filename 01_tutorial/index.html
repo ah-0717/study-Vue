@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>vue app</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div class="nav-bar"></div>
+
+	<div id="app">
+
+		<div class="product">
+				<div class="product-image">
+						<img v-bind:src="image" />
+					</div>
+			
+					<div class="product-info">
+							<h1>{{ product }}</h1>
+							<span v-show="onSale && inStock === true">On Sale!</span>
+							<p v-if="inStock"> In Stock</p>
+							<p v-else :style="{ textDecoration: 'line-through' }">Out of Stock</p>
+							<ul>
+								<li v-for="detail in details">{{detail}}</li>
+							</ul>
+
+							<div v-for="variant in variants"
+									 :key="variant.variantId"
+									 class="color-box"
+									 :style="{ backgroundColor: variant.variantColor }"
+									 @mouseover="updateProduct(variant.variantImage)">
+							</div>
+
+							<div class="cart">
+								<p>Cart{{cart}}</p>
+							</div>
+
+							<button v-on:click="addToCart"
+											:disabled="!inStock"
+											:class="{ disabledButton: !inStock }">Add to cart</button>
+							<button v-on:click="removeToCart">Remove to cart</button>
+
+						</div>
+		</div>
+
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
