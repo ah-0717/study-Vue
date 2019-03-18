@@ -55,6 +55,7 @@
 		</template>
 		<!-- if else -->
 		<!-- 仮想DOMの更新エラーを回避するためにユニークなkeyを付与すること -->
+		<!-- ただし単に表示させるだけなら問題ない -->
 		<div v-if="type === 'A'" key="1">
 			A
 		</div>
@@ -65,8 +66,66 @@
 			other1
 		</div>
 		<hr>
+		<!-- ループ -->
+		<ul>
+			<li v-for="item in list" :key="item.id * 10">
+				ID.{{item.id}} {{item.name}} {{item.hp}}
+			</li>
+			<!-- 配列はインデックスを受け取れる -->
+			<!-- <li v-for="(item, index) in list" :key="item.id"></li> -->
+			<!-- オブジェクトはkeyも受け取れる -->
+			<!-- <li v-for="(item key index) in list" :key="item.id"></li> -->
+		</ul>
+		<!-- ループx条件分岐 -->
+		<!-- 要素に追加 -->
+		<ul>
+			<li v-for="item in list"
+				:key="item.id * 100"
+				:class="{strong: item.hp > 300}">
+				ID.{{item.id}} {{item.name}} {{item.hp}}
+				<span v-if="item.hp > 300">強い！</span>
+			</li>
+		</ul>
+		<!-- 特定の条件のみ出力 -->
+		<ul>
+			<li v-for="item in list"
+				:key="item.id * 1000"	
+				v-if="item.hp < 300">
+				ID.{{item.id}} {{item.name}} {{item.hp}}
+			</li>
+		</ul>
+		<hr>
+		<!-- リストの更新 -->
+		名前 <input type="text" v-model="name">
+		<button v-on:click="doAdd">追加</button>
+		<button v-on:click="doFiltering">hp100以下で絞り込み</button>
+		<ul>
+			<li v-for="(item, index) in list"
+				:key="item.id * 10000">
+				ID.{{item.id}} {{item.name}} {{item.hp}}
+				<span v-if="item.hp < 50">瀕死！</span>
+				<button v-on:click="doRemove(index)">削除</button>
+				<button v-on:click="doMod(index)">編集</button>
+				<button v-on:click="doAttack(index)">攻撃</button>
+			</li>
+		</ul>
+		<hr>
+		<!-- オプションにデータを持たないv-for -->
+		<span v-for="item in 15">{{item}}</span><br>
+		<span v-for="item in [1, 2, 10, 100]">{{item}}</span><br>
+		<!-- 文字列に使うと一文字ずつ実行 -->
+		<div v-for="item in 'abc'">{{item}}</div>
+		<hr>
+		<!-- 外部からデータを取得 -->
+		<!-- <ul>
+			<li v-for="item in list2"
+				:key="item.id * 100000">
+				ID.{{item.id}} {{item.name}} {{item.hp}}
+			</li>
+		</ul> -->
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 	<script src="main.js"></script>
 </body>
 </html>
