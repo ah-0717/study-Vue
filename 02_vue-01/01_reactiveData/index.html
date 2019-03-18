@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div id="app">
+	<div id="app" v-cloak>
 		<!-- データバインディング -->
 		<p>{{message}}</p>
 		<p>{{state.count}}</p>
@@ -117,15 +117,34 @@
 		<div v-for="item in 'abc'">{{item}}</div>
 		<hr>
 		<!-- 外部からデータを取得 -->
-		<!-- <ul>
+		<ul>
 			<li v-for="item in list2"
 				:key="item.id * 100000">
 				ID.{{item.id}} {{item.name}} {{item.hp}}
 			</li>
-		</ul> -->
+		</ul>
+		<hr>
+		<!-- 直接DOMを参照するためにhelloと名付けた -->
+		<p ref="hello">hello</p>
+		<!-- 直接更新した時の動きの確認 -->
+		<button v-on:click="handleClick">カウントアップ</button>
+		<button v-on:click="show=!show">表示/非表示</button>
+		<span ref="count" v-if="show">0</span>
+		<hr>
+		<!-- テンプレート制御ディレクティブ -->
+		<!-- v-pre コンパイルをスキップする -->
+		<a :href="url" v-pre>{{message}}</a><br>
+		<!-- v-once 初回のみコンパイルする -->
+		<a :href="url" v-once>{{message}}</a><br>
+		<!-- v-text mustacheのみで構成されている要素ならばディレクティブを使ってバインドできる -->
+		<a :href="url" v-text="message"></a><br>
+		<!-- vーhtml HTMLを適応する -->
+		<a :href="url" v-html="htmlMsg"></a><br>
+		<!-- v-cloak インスタンスの準備が終わると自動で取り除かれる -->
+		<!-- 例：#appに対して付与しcssで更新時の動きを制御 -->
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="main.js"></script>
 </body>
 </html>

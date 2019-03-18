@@ -1,5 +1,3 @@
-import Axios from "axios";
-
 // 外で宣言したオブジェクトも対象
 let state = {count: 0};
 
@@ -37,6 +35,9 @@ const app = new Vue({
     name: 'キマイラ',
     // 外部読み込み用のリストを用意しておく
     list2: [],
+    show: true,
+    url: 'https://jp.vuejs.org/v2/guide/',
+    htmlMsg: '<strong>Vue.js!</strong>',
   },
   methods: {
     // カウントを増やすボタンをクリックした時のハンドラ
@@ -79,6 +80,13 @@ const app = new Vue({
     // リスト自体の更新もリアクティブ(listがプロパティだから)
     doFiltering() {
       this.list = this.list.filter((elm) => elm.hp <= 100);
+    },
+    // 直接DOMを更新した後に仮想DOMが更新された場合、カウントアップは反映されていないことになる
+    handleClick() {
+      const count = this.$refs.count;
+      if (count) {
+        count.innerText = parseInt(count.innerText, 10) + 1;
+      }
     }
   },
   created() {
@@ -86,13 +94,22 @@ const app = new Vue({
     this.list.forEach(function(item) {
       this.$set(item, 'active', false)
     }, this);
-    // 取得
-    // axios.get('list.json')
-    // .then(function(res) {
-    //   this.list2 = res.data;}.bind(this))
-    // .catch(function(err) {
-    //   console.error(err);
-    // });
+    // 外部ファイル取得
+    axios.get('list.json')
+    .then(function(res) {
+      this.list2 = res.data;}.bind(this))
+    .catch(function(err) {
+      console.error(err);
+    });
+  },
+  mounted() {
+    // DOMを直接参照する $el $refs
+    // mountedフェーズ以降に使用可能
+    // 直接DOMに更新しても最適化されていないため、仮想DOMの更新があったら上書きされる
+    // ルート要素の取得
+    console.log(this.$el);
+    // 対象のtemplate要素の取得
+    console.log(this.$refs.hello);
   }
 })
 
