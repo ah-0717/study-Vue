@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>vue app</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="app">
+		<!-- 算出プロパティは関数で定義するがプロパティで呼び出せる -->
+		<p>{{width}}の半分は{{halfWidth}}</p>
+		<p>X: {{halfPoint.x}}</p>
+		<p>Y: {{halfPoint.y}}</p>
+		<!-- セッター -->
+		<input type="text" v-model.number="width">{{width}} <br>
+		<input type="text" v-model.number="halfWidth">{{halfWidth}}
+		<hr>
+		<!-- 算出プロパティはキャッシュする、リアクティブデータのみキャッシュを再構築する -->
+		<p>算出プロパティ</p>
+		<ol>
+			<li>{{computedData}}</li>
+			<li>{{computedData}}</li>
+		</ol>
+		<p>メソッド</p>
+		<ol>
+			<li>{{methodsData()}}</li>
+			<li>{{methodsData()}}</li>
+		</ol>
+		<hr>
+		<!-- 算出プロパティの利用 -->
+		<input type="text" v-model.number="budget">円以下に絞り込む
+		<input type="text" v-model.number="limit">件を表示
+		<button @click="order=!order">切り替え</button>
+		<p>{{matched.length}}件中{{filteredList.length}}件を表示中</p>
+		<ul>
+			<li v-for="item in filteredList" :key="item.id">
+				{{item.name}} {{item.price}}円
+			</li>
+		</ul>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/lodash/4.17.1/lodash.min.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
