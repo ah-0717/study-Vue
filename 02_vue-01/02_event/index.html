@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>vue app</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="app">
+		<!-- v-on ハンドルの定義 -->
+		<!-- メソッドイベントハンドラ -->
+		<button v-on:click="handleClick">クリック</button><br>
+		<!-- v-onは@で記述できる -->
+		<!-- <button @click="handleClick">クリック</button> -->
+		<!-- インラインメソッドハンドラ -->
+		<button @click="count++">クリック</button>{{count}}<br>
+		<!-- DOMイベントは$eventで渡せる -->
+		<button @click="handleClick2(item, $event)">クリック</button><br>
+		<!-- 使用可能なDOMイベントはブラウザがサポートしているもの -->
+		<img src="image.png" @load="show=true" :class="{hide: !show}" style="width: 100px; height: 100px;">
+		<hr>
+		<!-- フォーム値の取得 -->
+		<input type="text" :value="message" @change="handleInput">
+		<!-- イベント修飾子 -->
+		<!-- 例：右クリック時にコンテキストメニューを出さない -->
+		<div @click.right.privemt="handler">example</div>
+		<!-- .stop 例：div2クリック時にバブリングを抑制する -->
+		<div @click="handler('div1')">
+			div1
+			<a href="#top" @click.stop="handler('div2')">div2</a>
+		</div>
+		<!-- .prevent 処理をキャンセルする -->
+		<div @click="handler('div1')">
+				div1
+			<a href="#top" @click.prevent="handler('div2')">div2</a>
+		</div>
+		<!-- .captue キャプチャモードでイベントを発生させる -->
+		<div @click.capture="handler('div1')">
+			div1
+			<div @click="handler('div2')">
+				div2
+				<div @click="handler('div3')">div3</div>
+			</div>
+		</div>
+		<!-- キー修飾子 -->
+		<!-- よく使うものにはエイリアスがある -->
+		<input type="text" @click.13="handler">
+		<input type="text" @click.enter="handler">
+		<!-- システム修飾子 -->
+		<!-- シフトボタンを押下しながらじゃないとイベントが発火しない -->
+		<button @click.shift="doDelete">削除ボタン</button>
+		<hr>
+		<!-- フォーム入力バインディング -->
+		<!-- v-model 双方向データバインディング -->
+		<input type="text" v-model="message">
+		<p>{{message}}</p>
+		<!-- 複数行 型は常に文字列 -->
+		<textarea v-model="message" name="" id="" cols="30" rows="2"></textarea>
+		<pre>{{message}}</pre>
+		<!-- 単一チェックボックス デフォルト値はbool-->
+		<label for="">
+			<input type="checkbox" v-model="val">{{val}}
+		</label><br>
+		<!-- 複数チェックボックス 型は配列 -->
+		<label for=""><input type="checkbox" v-model="val2" value="A">A</label>
+		<label for=""><input type="checkbox" v-model="val2" value="B">B</label>
+		<label for=""><input type="checkbox" v-model="val2" value="C">C</label>
+		<p>{{val2}}</p>
+		<!-- ラジオボタン 型は文字列 -->
+		<label for=""><input type="radio" v-model="val3" value="A">A</label>
+		<label for=""><input type="radio" v-model="val3" value="B">B</label>
+		<label for=""><input type="radio" v-model="val3" value="C">C</label>
+		<p>{{val3}}</p>
+		<!-- 単一セレクトボックス 型は文字列 -->
+		<select v-model="val4">
+			<option disabled="disabled">選択してください</option>
+			<option v-for="item in items" :value="item">{{item}}</option>
+		</select>
+		<p>{{val4}}</p>
+		<!-- 複数セレクトボックス 型は配列 -->
+		<select v-model="val5" multiple>
+				<option disabled="disabled">選択してください</option>
+				<option v-for="item in items" :value="item">{{item}}</option>
+		</select>
+		<p>{{val5}}</p>	
+		<!-- 画像ファイルは v-modelを使用できない、リアクティブデータと同期するには changeを使う -->
+		<input type="file" @change="handleChange">
+		<div v-if="preview"><img :src="preview" alt="" style="width: 100px; height: 100px;"></div><br>
+		<!-- 修飾子 -->
+		<!-- .price 数値に変換する -->
+		<input type="text" v-model.number="price"> {{price}}
+		<hr>
+		<!-- マウント要素外のイベントと操作 -->
+		<header :class="{compact: scrollY > 200}">
+			200pxより下にスクロールしたら .compactを付与
+		</header>
+		<div v-on:click="scrollTop">
+			ページ上部へ移動
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@12.1.5"></script>
+	<script src="main.js"></script>
+</body>
+</html>

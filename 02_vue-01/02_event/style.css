@@ -1,0 +1,7 @@
+img {
+  opacity: 1;
+  transition: opasity 1s;
+}
+img .hide {
+  opacity: 0;
+}
