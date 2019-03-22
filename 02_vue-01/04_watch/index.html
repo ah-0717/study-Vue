@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>vue app</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="app">
+		item.value<input type="text" v-model="item.value">
+		item.value2<input type="text" v-model="item.value2"><br>
+		<input type="text" v-model="list[0].name">
+		
+		<hr>
+		<select v-model="current">
+			<option v-for="topic in topics" :value="topic.value">
+				{{topic.name}}
+			</option>
+		</select>
+		<div v-for="item in repoList">{{item.full_name}}</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/lodash/4.17.1/lodash.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios@0.17.1/dist/axios.min.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
