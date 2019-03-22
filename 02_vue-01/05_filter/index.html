@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>vue app</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="app">
+		<!-- 対象のデータ | フィルタ名 -->
+		{{price | localNum}}円<br>
+		{{price2 | localNum2}}円<br>
+		<!-- フィルタへの引数 -->
+		{{message | filter(foo, 100)}}<br>
+		<!-- フィルタのチェーン -->
+		<!-- {{value | filter1 | filter2}} -->
+		180度は{{180 | radian | round}}ラジアン
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/lodash/4.17.1/lodash.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios@0.17.1/dist/axios.min.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
