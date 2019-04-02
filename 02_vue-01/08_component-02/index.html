@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>vue app</title>
+</head>
+<body>
+	<div id="app">
+		<!-- 親コンポーネントのテンプレート子コンポーネントを使用する時属性としてコンポーネントにデータを渡せる -->
+		<comp-child val="子A"></comp-child>
+		<comp-child val="子B"></comp-child>
+		<!-- 親が持っているリアクティブデータを渡す -->
+		<comp-child :val="message" class="item"></comp-child>
+
+		<!-- リストレンダリング　親コンポーネント -->
+		<ul>
+			<comp-list v-for="item in list"
+				:key="item.id"
+				:name="item.name"
+				:hp="item.hp"></comp-list>
+		</ul>
+
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/lodash/4.17.1/lodash.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios@0.17.1/dist/axios.min.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
