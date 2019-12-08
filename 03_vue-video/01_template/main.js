@@ -27,6 +27,9 @@ const app = new Vue({
     changeMousePosition2(event, hoge) {
       this.x = event.clientX / hoge
       this.y = event.clientY / hoge
+    },
+    myAlert() {
+      alert('alert')
     }
   }
 })

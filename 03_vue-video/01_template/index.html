@@ -16,6 +16,8 @@
 		<p><span v-on:mousemove="changeMousePosition">マウスを乗せてね</span> X：{{x}} Y：{{y}}</p>
 		<!-- stopPropagation() preventDefault()を簡潔にかける -->
 		<p><span v-on:mousemove="changeMousePosition2($event, 3)">マウスを乗せてね<span v-on:mousemove.stop.prevent>バブリング</span></span> X：{{x}} Y：{{y}}</p>
+		<!-- キー修飾詞 -->
+		<input type="text" v-on:keyup.enter.space="myAlert">
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="main.js"></script>
