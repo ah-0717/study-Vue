@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>vue app</title>
+</head>
+<body>
+	<div id="app">
+		<p v-once v-text="text"></p>
+		<p>{{ sayHi()}}</p>
+		<!-- xssに注意 -->
+		<p v-html="html"></p>
+		<p><a :href="url">Google</a></p>
+		<p><a v-bind="twitterObj">Twitter</a></p>
+		<button v-on:click="countUp">{{ count }}回クリック</button>
+		<p><span v-on:mousemove="changeMousePosition">マウスを乗せてね</span> X：{{x}} Y：{{y}}</p>
+		<!-- stopPropagation() preventDefault()を簡潔にかける -->
+		<p><span v-on:mousemove="changeMousePosition2($event, 3)">マウスを乗せてね<span v-on:mousemove.stop.prevent>バブリング</span></span> X：{{x}} Y：{{y}}</p>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
