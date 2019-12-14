@@ -1,5 +1,6 @@
 const app = new Vue({
   el: '#app',
+  // dataは動的な値は置かない（初期値）
   data: {
     text: 'text',
     html: '<h1>hoge</h1>',
@@ -10,7 +11,29 @@ const app = new Vue({
     },
     count: 0,
     x: 0,
-    y: 0
+    y: 0,
+    message: 'こんにちは',
+    isActive: true
+  },
+  // 動的な値 プロパティなのでreturnする必要あり
+  // リアクティブな依存関係に基づいてキャッシュされる
+  computed: {
+    // countに変更があった時のみ呼ばれる
+    lessThanThree() {
+      return this.count > 3
+    },
+    classObj() {
+      return { red: this.isActive, 'bg-blue': !this.isActive }
+    }
+  },
+  // dataが変化した時に特定の処理
+  // 非同期な処理
+  watch: {
+    count() {
+      setTimeout(() => {
+        this.count = 0
+      }, 3000)
+    }
   },
   methods: {
     sayHi() {

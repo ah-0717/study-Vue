@@ -3,6 +3,7 @@
 <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>vue app</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<div id="app">
@@ -13,11 +14,17 @@
 		<p><a :href="url">Google</a></p>
 		<p><a v-bind="twitterObj">Twitter</a></p>
 		<button v-on:click="countUp">{{ count }}回クリック</button>
+		<button @click="countUp">{{ count }}回クリック</button>
+		<p>{{ lessThanThree }}</p>
 		<p><span v-on:mousemove="changeMousePosition">マウスを乗せてね</span> X：{{x}} Y：{{y}}</p>
 		<!-- stopPropagation() preventDefault()を簡潔にかける -->
 		<p><span v-on:mousemove="changeMousePosition2($event, 3)">マウスを乗せてね<span v-on:mousemove.stop.prevent>バブリング</span></span> X：{{x}} Y：{{y}}</p>
 		<!-- キー修飾詞 -->
 		<input type="text" v-on:keyup.enter.space="myAlert">
+		<p>双方向バインディング<input type="text" v-model="message"></p>
+		<p>{{message}}</p>
+		<p :class="classObj">Hello</p>
+		<button @click="{ isActive = !isActive }">切り替え</button>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="main.js"></script>
