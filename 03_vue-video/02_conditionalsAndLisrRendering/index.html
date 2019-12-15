@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>vue app</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="app">
+		<p v-if="ok">OK</p><!-- 要素ごとfalse時は消える -->
+		<p v-else-if="maybeOk">maybe OK</p><!-- すぐ隣におこう -->
+		<p v-else>NG</p><!-- すぐ隣におこう -->
+		<template v-if="ok"><!-- DOMには反映されない グループ化に便利 -->
+			<p>Hello</p>
+			<p>Hello</p>
+			<p>Hello</p>
+		</template>
+		<button @click="ok = !ok">ボタン</button>
+		<p v-show="ok">OK</p><!-- false時要素は残る -->
+		<p v-show="!ok">Not OK</p><!-- elseはない -->
+		<template v-if="ok"><!-- これはだめ -->
+			<p>Hello (show)</p>
+		</template>
+		<!--
+			v-showのデメリット：初期表示のコストが大きい 最初に全ての要素をDOM追加したのちに、cssで制御するから
+			v-ifのデメリット：切り替え時にちらつく DOMから消したり追加したりを繰り返すため
+		-->
+		<ul>
+			<li v-for="(fruit, index) in fruits">
+				({{ index }}){{ fruit }}
+			</li>
+		</ul>
+		<ul>
+			<li v-for="(value, key, index) in person"><!-- オブジェクトの中身は順番が保証されていない -->
+				({{ index }})({{ key }}){{ value }}
+			</li>
+		</ul>
+		<ul>
+			<template v-for="fruit of fruits"> <!-- ofでもOK -->
+				<li>{{fruit}}</li>
+				<hr>
+			</template>
+		</ul>
+		<ul>
+			<li v-for="n in 10"><!-- 整数値も取れる -->
+				{{ n }}
+			</li>
+		</ul>
+
+		<ul>
+			<div v-for="fruit of fruits" :key="fruit"><!-- keyがないと削除した時のinputが意図されない消され方する keyは必ずつけて一意な値にする -->
+				<p>{{fruit}}</p>
+				<input type="text">
+			</div>
+		</ul>
+		<button @click="remove">先頭を削除</button>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
