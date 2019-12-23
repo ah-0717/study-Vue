@@ -1,6 +1,6 @@
 import Vue from 'vue'
 // .vueファイルはシングルファイルコンポーネントという
-// Appはコンポーネントのオブジェクト
+// Appはコンポーネントのオブジェクト（vueLoader）
 import App from './App.vue'
 
 Vue.config.productionTip = true
