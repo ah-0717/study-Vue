@@ -1,0 +1,25 @@
+<template>
+  <div>
+    <p>いいね（{{number}}）</p>
+    <button @click="increment">+1</button>
+  </div>
+</template>
+
+<script>
+  export default {
+    // babelをしようしているのでES6もOK
+    data() {
+      return {
+        number: 5
+      }
+    },
+    methods: {
+      increment() {
+        this.number += 1
+      }
+    }
+  }
+</script>
+
+<style>
+</style>
