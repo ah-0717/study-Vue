@@ -1,16 +1,28 @@
 <template>
   <div>
-    <p>いいね（{{number}}）</p>
+    <!-- <p>いいね（{{totalNumber / 2}}）</p> -->
+    <p>いいね（{{halfNumber}}）</p>
     <button @click="increment">+1</button>
   </div>
 </template>
 
 <script>
   export default {
-    // babelをしようしているのでES6もOK
-    data() {
-      return {
-        number: 5
+    // props: ['totalNumber'],
+    props: {
+      // 型を指定できる
+      // totalNumber: String,
+      totalNumber: {
+        type: Number,
+        // required: true, // defaultと共存できない
+        default: 20 // プリミティブな値のみ
+        // default: () => ({number: 5}) // 配列やオブジェクトの場合は関数にする
+      },
+    },
+    computed: {
+      halfNumber() {
+        // propsはスクリプトでも利用OK
+        return this.totalNumber / 2
       }
     },
     methods: {
