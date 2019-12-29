@@ -5,7 +5,8 @@
     <like-header></like-header>
     <h2>トータルのいいね数{{number}}</h2>
     <!-- キャメルケースでもかける -->
-    <LikeNumber :totalNumber="number"></LikeNumber>
+    <!-- <LikeNumber :totalNumber="number" @my-click="number = $event"></LikeNumber> -->
+    <LikeNumber :totalNumber="number" @my-click="incrementNumber"></LikeNumber>
     <!-- ケバブケースでもかける プロパティはこちらを推奨 -->
     <LikeNumber :total-number="number"></LikeNumber>
     <LikeNumber></LikeNumber>
@@ -25,6 +26,13 @@ export default {
   },
   components: {
     LikeHeader
+  },
+  methods: {
+    // カスタムイベントのincrementNumberに引数がなくても$emitに渡した値が入る
+    incrementNumber(value) {
+      // ポイントは親が子供のデータに依存しているわけではない＝単一方向
+      this.number = value
+    }
   }
 }
 </script>

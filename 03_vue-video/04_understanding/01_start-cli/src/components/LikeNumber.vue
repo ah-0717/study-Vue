@@ -8,7 +8,7 @@
 
 <script>
   export default {
-    // props: ['totalNumber'],
+    // props: ['totalNumber', 'hoge'],
     props: {
       // 型を指定できる
       // totalNumber: String,
@@ -26,10 +26,15 @@
       }
     },
     methods: {
+      // increment() {
+      //   this.number += 1
+      // },
       increment() {
-        this.number += 1
-      }
-    }
+        // 親のメソッド（イベント）を発火 (親のイベントを発火するタイミングでデータを渡せる)
+        // $emitでカスタムイベントを作成できる
+        this.$emit('my-click', this.totalNumber + 1);
+      },
+    },
   }
 </script>
 
