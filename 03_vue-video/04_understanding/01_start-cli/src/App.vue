@@ -24,12 +24,22 @@
     <!-- ケバブケースでもかける プロパティはこちらを推奨 -->
     <LikeNumber :total-number="number"></LikeNumber>
     <LikeNumber></LikeNumber>
+    <hr>
+    <!-- 動的コンポーネント -->
+    <component :is="currentComponent"></component> <!-- 切り替わるたびに毎回コンポーネントが削除・生成される -->
+    <keep-alive>
+      <component :is="currentComponent"></component> <!-- 切り替わるたびに毎回コンポーネントが削除・生成されない -->
+    </keep-alive>
+    <button @click="currentComponent = 'Home'">Home</button>
+    <button @click="currentComponent = 'About'">About</button>
   </div>
 </template>
 
 <script>
 // ローカル登録 App.vueでのみコンポーネントが使える
 import LikeHeader from './components/LikeHeader.vue'
+import Home from './components/Home.vue'
+import About from './components/About.vue'
 
 export default {
   // babelをしようしているのでES6もOK
@@ -37,11 +47,14 @@ export default {
     return {
       number: 10,
       // 動的な名前
-      title: 'title'
+      title: 'title',
+      currentComponent: 'Home'
     }
   },
   components: {
-    LikeHeader
+    LikeHeader,
+    Home,
+    About
   },
   methods: {
     // カスタムイベントのincrementNumberに引数がなくても$emitに渡した値が入る
