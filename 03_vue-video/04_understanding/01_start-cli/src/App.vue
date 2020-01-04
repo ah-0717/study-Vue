@@ -32,6 +32,99 @@
     </keep-alive>
     <button @click="currentComponent = 'Home'">Home</button>
     <button @click="currentComponent = 'About'">About</button>
+    <hr>
+    <div>
+      <!--
+        修飾詞 v-model.XXX
+        lazy: フォーカスが外れたタイミングで実行される
+        number: input numberの型をnumberにする（通常はstringになってしまう
+        trim: 前後の空白を削除する
+      -->
+      <h3>イベントのフォーム</h3>
+      <!-- <label for="title">タイトル</label>
+      <input
+        id="title"
+        type="text"
+        v-model.lazy="eventData.title"
+      > -->
+      <EventTitle v-model="eventData.title"></EventTitle>
+      <!-- 下記はカスタムコンポーネントのv-model指定時と同等の記述 -->
+      <!-- <EventTitle
+        :value="eventData.title"
+        @input="eventData.title = $event"
+      ></EventTitle> -->
+      <label for="maxNumbar">最大人数</label>
+      <input
+        id="maxNumbar"
+        type="number"
+        v-model.number="eventData.maxNumber"
+      >
+      <p>{{typeof eventData.maxNumber}}</p>
+      <label for="host">主催者</label>
+      <input
+        id="host"
+        type="text"
+        v-model.trim="eventData.host"
+      >
+      <pre>{{eventData.host}}</pre>
+      <label for="detail">イベントの内容</label>
+      <textarea
+        id="detail"
+        type="text"
+        v-model="eventData.detail"
+      ></textarea>
+      <pre>{{eventData.detail}}</pre>
+      <input
+        type="checkbox"
+        id="isPrivate"
+        v-model="eventData.isPrivate">
+      <label for="isPrivate">非公開</label>
+      <p>{{eventData.isPrivate}}</p>
+      <!-- v-modelが同じオブジェクトを参照していると、自動で関連づけてくれる checkBox, radio -->
+      <input
+        type="checkbox"
+        id="10"
+        value="10代"
+        v-model="eventData.target"
+      >
+      <label for="10">10代</label>
+      <input
+        type="checkbox"
+        id="20"
+        value="20代"
+        v-model="eventData.target"
+      >
+      <label for="30">20代</label>
+      <input
+        type="checkbox"
+        id="30"
+        value="30代"
+        v-model="eventData.target">
+      <label for="30">30代</label>
+      <p>{{eventData.target}}</p>
+      <input
+        type="radio"
+        id="free"
+        value="無料"
+        v-model="eventData.price"
+      >
+      <label for="free">無料</label>
+      <input
+        type="radio"
+        id="paid"
+        value="有料"
+        v-model="eventData.price" 
+      >
+      <label for="paid">有料</label>
+      <p>{{eventData.price}}</p>
+      <select v-model="eventData.location">
+        <option
+          v-for="location in locations"
+          :key="location"
+        >{{location}}</option>
+      </select>
+      <p>{{eventData.location}}</p>
+    </div>
   </div>
 </template>
 
@@ -40,6 +133,7 @@
 import LikeHeader from './components/LikeHeader.vue'
 import Home from './components/Home.vue'
 import About from './components/About.vue'
+import EventTitle from './components/EventTitle.vue'
 
 export default {
   // babelをしようしているのでES6もOK
@@ -48,13 +142,25 @@ export default {
       number: 10,
       // 動的な名前
       title: 'title',
-      currentComponent: 'Home'
+      currentComponent: 'Home',
+      locations: ['東京', '大阪', '名古屋'],
+      eventData: {
+        title: 'タイトル',
+        maxNumber: 0,
+        host: '',
+        detail: '',
+        isPrivate: false,
+        target: [],
+        price: '無料',
+        location: '東京'
+      }
     }
   },
   components: {
     LikeHeader,
     Home,
-    About
+    About,
+    EventTitle
   },
   methods: {
     // カスタムイベントのincrementNumberに引数がなくても$emitに渡した値が入る
