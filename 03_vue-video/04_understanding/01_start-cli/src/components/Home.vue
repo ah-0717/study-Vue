@@ -4,16 +4,26 @@
     <!-- 修飾詞も登録できる -->
     <p v-border2:solid.round.shadow="{width: '5px', color: 'red'}">{{home | lowerCase}}</p>
     <p>{{title | upperCase}}</p>
+    <p>{{number}}</p>
+    <button @click="number++">+1</button>
+    <CountNumber></CountNumber>
   </div>
 </template>
 
 <script>
+import CountNumber from './CountNumber.vue'
+import {tokyoNumber} from '@/tokyoNumber'
+
 export default {
+  // オプションを共有化できる、差分だけの記述で良くなる
+  mixins: [tokyoNumber],
   data() {
     return {
       home: 'Home',
-      title: 'title'
     }
+  },
+  components: {
+    CountNumber,
   },
   filters: {
     lowerCase(value) {
