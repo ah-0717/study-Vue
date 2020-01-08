@@ -47,6 +47,12 @@ Vue.directive('border', (el ,binding) => {
   }
 });
 
+// フィルタ
+// 引数を必ずとる
+Vue.filter('upperCase', value => {
+  return value.toUpperCase()
+})
+
 new Vue({
   // コンポーネントのオブジェクトを与えてる
   render: h => h(App),

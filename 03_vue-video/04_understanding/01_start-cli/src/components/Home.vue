@@ -1,14 +1,24 @@
 <template>
-  <!-- :の後に引数を取れる、ただし、一つだけ -->
-  <!-- 修飾詞も登録できる -->
-  <p v-border2:solid.round.shadow="{width: '5px', color: 'red'}">{{home}}</p>
+  <div>
+    <!-- :の後に引数を取れる、ただし、一つだけ -->
+    <!-- 修飾詞も登録できる -->
+    <p v-border2:solid.round.shadow="{width: '5px', color: 'red'}">{{home | lowerCase}}</p>
+    <p>{{title | upperCase}}</p>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      home: 'Home'
+      home: 'Home',
+      title: 'title'
+    }
+  },
+  filters: {
+    lowerCase(value) {
+      // 注意：filtersでthisは使えない
+      return value.toLowerCase();
     }
   },
   // ローカル登録
