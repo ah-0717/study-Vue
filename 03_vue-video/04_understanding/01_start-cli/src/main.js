@@ -53,6 +53,14 @@ Vue.filter('upperCase', value => {
   return value.toUpperCase()
 })
 
+// ミックスイン
+// グローバルに登録すると、全てのVueインスタンスに適用されてしまう為注意が必要
+// プラグインを作成する際に使う可能性があるくらいで基本的に使わない
+// Vue.mixin({
+//   created() {
+//   },
+// })
+
 new Vue({
   // コンポーネントのオブジェクトを与えてる
   render: h => h(App),
