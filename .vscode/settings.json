@@ -1,0 +1,36 @@
+{
+  // "window.zoomLevel": 2,
+  "editor.renderWhitespace": "all",
+  "editor.tabSize": 2,
+  "workbench.colorTheme": "Dracula",
+  // "workbench.iconTheme": "material-icon-theme",
+  "html.format.wrapLineLength": 100,
+  "editor.wordWrapColumn": 100,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "language": "vue",
+      "autoFix": true
+    }
+  ],
+  "editor.formatOnPaste": true
+],
+"html.format.wrapAttributes": "force-expand-multiline",
+"vetur.completion.tagCasing": "initial",
+"vetur.format.defaultFormatterOptions": {
+  "prettier": {
+    "singleQuote": true
+  }
+},
+// "editor.fontSize": 15,
+"breadcrumbs.enabled": true,
+"emmet.triggerExpansionOnTab": true,
+"eslint.autoFixOnSave": true,
+"[javascript]": {
+  "editor.formatOnSave": false
+},
+"vetur.validation.template": false,
+"vetur.format.defaultFormatter.html": "none",
+"editor.formatOnSave": true,
+}
