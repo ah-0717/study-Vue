@@ -12,11 +12,11 @@
     <!-- <h1>User No. {{ $route.params.id }}</h1> -->
     <!-- または、routerの設定でprops:ture routerに依存していない書き方ができる -->
     <h1>User No. {{ id }}</h1>
-    <router-link :to="`/users/${Number(id)+1}/profile`">
+    <router-link :to="`/users/${Number(id)+1}/profile?lang=ja`">
       次のユーザー
     </router-link>
     <!-- 名前付きルート -->
-    <router-link :to="{name: 'users-id-profile', params: {id: Number(id)+1}}">
+    <router-link :to="{name: 'users-id-profile', params: {id: Number(id)+1}, query: {lang: 'ja', page: 2}}">
       次のユーザー
     </router-link>
     <router-view />
