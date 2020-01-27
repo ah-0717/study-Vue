@@ -4,32 +4,46 @@ import Home from './views/Home.vue'
 import Users from './views/Users.vue'
 import UsersPosts from './views/UsersPosts.vue'
 import UsersProfile from './views/UsersProfile.vue'
+import HeaderHome from './views/HeaderHome.vue'
+import HeaderUsers from './views/HeaderUsers.vue'
 
 // vue専用のプラグインを使用するための宣言
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history', // hash, historyの選択
+  mode: "history", // hash, historyの選択
   // urlとコンポーネントのマッピング
   routes: [
-    {path: '/', component: Home},
+    // {path: '/', component: Home}, // 通常の指定
     {
-      path: '/users/:id',
-      component: Users,
+      path: "/",
+      components: {
+        // 名前付きViewの指定はcomponents
+        default: Home,
+        header: HeaderHome
+      }
+    },
+    {
+      path: "/users/:id",
+      components: {
+        // 名前付きViewの指定はcomponents
+        default: Users,
+        header: HeaderUsers
+      },
       // パラメーターがpropsとして入ってくる
       props: true,
       children: [
         {
           // 先頭に/は付けない
-          path: 'posts',
+          path: "posts",
           component: UsersPosts
         },
         {
-          path: 'profile',
+          path: "profile",
           component: UsersProfile,
-          name: 'users-id-profile' // 任意の名前をつけることが可能 名前付きルートで使用可能
-        },
+          name: "users-id-profile" // 任意の名前をつけることが可能 名前付きルートで使用可能
+        }
       ]
     }
   ]
-})
+});
