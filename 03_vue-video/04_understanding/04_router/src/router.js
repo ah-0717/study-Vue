@@ -19,6 +19,7 @@ export default new Router({
       path: "/",
       components: {
         // 名前付きViewの指定はcomponents
+        // 一つのURLに対して二つ指定する [routerLinkName]: componentName
         default: Home,
         header: HeaderHome
       }
@@ -31,7 +32,11 @@ export default new Router({
         header: HeaderUsers
       },
       // パラメーターがpropsとして入ってくる
-      props: true,
+      // props: true,
+      props: { // 前付きviewはオブジェクトにする
+        default: true,
+        header: false
+      },
       children: [
         {
           // 先頭に/は付けない
