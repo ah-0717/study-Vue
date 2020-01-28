@@ -49,6 +49,11 @@ export default new Router({
           name: "users-id-profile" // 任意の名前をつけることが可能 名前付きルートで使用可能
         }
       ]
+    },
+    {
+      path: "*", // *はワイルドカード
+      redirect: "/"
+      // redirect: {path: "/"} // オブジェクトでの記述も可能
     }
   ]
 });
